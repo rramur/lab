@@ -1,0 +1,46 @@
+version: "2.1"
+services:
+  tp1_client:
+      container_name: tp1_client
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+        - ./client_src/:/src
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.10
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      command:
+        /bin/bash
+  tp1_server:
+      container_name: tp1_server
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+          - ./server_src:/src
+      networks:
+       net-in:
+         ipv4_address: 192.168.100.20
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 2.0
+      mem_limit: '2000000000'
+      memswap_limit: '2000000000'
+      mem_swappiness: 0
+
+networks:
+  net-in:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.100.0/24"
+        
