@@ -1,0 +1,106 @@
+version: "2.1"
+services:
+  tp3_client1:
+      container_name: tp3_client1
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+        - ./client_src/:/src
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.10
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      environment:
+        - OUT_GW_NETWORK=192.168.200.0
+        - OUT_GW_IP=192.168.100.9
+      command:
+        /bin/bash
+
+  tp3_client2:
+      container_name: tp3_client2
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+        - ./client_src/:/src
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.11
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      environment:
+        - OUT_GW_NETWORK=192.168.200.0
+        - OUT_GW_IP=192.168.100.9
+      command:
+        /bin/bash
+
+  tp3_server:
+      container_name: tp3_server
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+          - ./server_src:/src
+      networks:
+       net-out:
+         ipv4_address: 192.168.200.20
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 2.0
+      mem_limit: '2000000000'
+      memswap_limit: '2000000000'
+      mem_swappiness: 0
+      environment:
+        - IN_GW_NETWORK=192.168.100.0
+        - IN_GW_IP=192.168.200.9
+      command:
+        /bin/bash
+
+  tp3_router:
+      container_name: tp3_router
+      image: rramur/ubuntu-dev:bionic
+      volumes:
+          - ./router_src:/src
+      networks:
+       net-in:
+         ipv4_address: 192.168.100.9
+       net-out:
+         ipv4_address: 192.168.200.9
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 2.0
+      mem_limit: '2000000000'
+      memswap_limit: '2000000000'
+      mem_swappiness: 0
+      command:
+        /bin/bash
+
+
+networks:
+  net-in:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.100.0/24"
+  net-out:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.200.0/24"
+        
