@@ -1,0 +1,5 @@
+# ignore following dirs
+
+client_src/*
+server_src/*
+router_src/*
