@@ -21,3 +21,14 @@ In this topology Server will have ssh and http service running. Each Client will
 
 In this topology Server and Client are in different networks. Thier communication is through the network router 
 
+
+## Tools
+
+To install iperf3 run the following commands on required instances 
+```
+apt-get update -y
+apt-get install -y iperf3
+```
+
+To start the server `iperf3 -s`
+To stat the traffic intiate client with command `iperf3 -c <server_ip>`
