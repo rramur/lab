@@ -1,34 +1,7 @@
-# Simple Network Lab
+# Lab Space
+This repo will deal with various lab topologies for networking and programming 
 
-This Project will provide 3 simple network topology to start the basic stats collection
+## Topology
 
-## Simple Client Server
+Network topologies can be found at `network`
 
-![Client Server](images/topology1.png?raw=true "Client Server")
-
-This topology will have client and server instances. Server will have ssh and http servers running on it. Client will use ssh and wget to generate the traffic 
-Client and server should be capable enoguh to run iperf tools
-
-## Multi Client and Server
-
-![Multi Client Server](images/topology2.png?raw=true "Multi Client Server")
-
-In this topology Server will have ssh and http service running. Each Client will use ssh and wget to generate the traffic . Both Client and server should be capable enoguh to run iperf tools
-
-## Client Network and Server Network
-
-![Network](images/topology3.png?raw=true "Network")
-
-In this topology Server and Client are in different networks. Thier communication is through the network router 
-
-
-## Tools
-
-To install iperf3 run the following commands on required instances 
-```
-apt-get update -y
-apt-get install -y iperf3
-```
-
-To start the server `iperf3 -s`
-To stat the traffic intiate client with command `iperf3 -c <server_ip>`
