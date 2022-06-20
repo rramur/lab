@@ -1,0 +1,77 @@
+version: "2.1"
+services:
+  arp_probe:
+      container_name: arp_probe
+      image: suhasi/platform-sys:latest
+      volumes:
+          - ./probe_src:/src
+      networks:
+       net-in:
+         ipv4_address: 192.168.100.251
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 2.0
+      mem_limit: '2000000000'
+      memswap_limit: '2000000000'
+      mem_swappiness: 0
+  host1:
+      container_name: host1
+      image: suhasi/platform-sys:latest
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.50
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      command:
+        /bin/bash
+  host2:
+      container_name: host2
+      image: suhasi/platform-sys:latest
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.100
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      command:
+        /bin/bash
+  host3:
+      container_name: host3
+      image: suhasi/platform-sys:latest
+      networks:
+         net-in:
+           ipv4_address: 192.168.100.150
+      stdin_open: true
+      privileged: true
+      cap_add:
+        - ALL
+      tty: true
+      cpus: 1.0
+      mem_limit: '1000000000'
+      memswap_limit: '1000000000'
+      mem_swappiness: 0
+      command:
+        /bin/bash
+networks:
+  net-in:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.100.0/24"
+        
